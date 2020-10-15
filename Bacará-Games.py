@@ -73,9 +73,23 @@ while i < len(players):
     i += 1
     j += 1
 
+#Card Value
+points = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':0, 'J':0, 'Q':0, 'K':0}
+
+a = deck[0]
+b = deck[1]
+c = deck[2]
+d = deck[3]
 
 
+table_points = points[a[0]] + points[b[0]]
+print(table_points)
+if table_points >= 10:
+    table_points = table_points - (table_points - (table_points % 10))
+print('Table has {} points'.format(table_points))
 
-
-
-
+house_points = points[c[0]] + points[d[0]]
+print(house_points)
+if house_points >= 10:
+    house_points = house_points - (house_points - (house_points % 10))
+print('House has {} points'.format(house_points))
