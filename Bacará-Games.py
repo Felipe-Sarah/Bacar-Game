@@ -128,7 +128,7 @@ while True:
 
 
 
-    bank_points = points[a[0]] + points[b[0]]
+    players_points = points[a[0]] + points[b[0]]
     if players_points >= 10:
         players_points = players_points - (players_points - (players_points % 10))
     print('Players have {} points'.format(players_points))
