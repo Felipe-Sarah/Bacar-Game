@@ -115,7 +115,7 @@ while True:
     bank_cards = [deck[2], deck[3]]
 
     print('Players has {}'.format(players_cards))
-    print('Bank has {}'.format(bank_cards))
+    print('Players has {}'.format(bank_cards))
 
 
 
@@ -128,7 +128,7 @@ while True:
 
 
 
-    players_points = points[a[0]] + points[b[0]]
+    bank_points = points[a[0]] + points[b[0]]
     if players_points >= 10:
         players_points = players_points - (players_points - (players_points % 10))
     print('Players has {} points'.format(players_points))
@@ -147,7 +147,7 @@ while True:
                 resultado = 'Tie'
                 break
             elif players_points > bank_points:
-                print('players win')
+                print('Players wins')
                 resultado = 'Players'
                 break
             else:
@@ -157,37 +157,37 @@ while True:
 
         if players_points < 6:
             players_cards.append(e)
-            print('Players have {}'.format(players_cards))
+            print('Players has {}'.format(players_cards))
             players_points = players_points + points[e[0]]
             if players_points >= 10:
                 players_points = players_points - (players_points - (players_points % 10))
-            print('Players have {} points'.format(table_points))
+            print('Players have {} points'.format(players_points))
 
         
 
-        if bank_points < 6 and len(table_cards) == 2:
-            house_cards.append(e)
-            print('House has {}'.format(house_cards))
-            house_points = house_points + points[e[0]]
-            if house_points >= 10:
-                house_points = house_points - (house_points - (house_points % 10))
-            print('House has {} points'.format(house_points))
+        if bank_points < 6 and len(players_cards) == 2:
+            bank_cards.append(e)
+            print('Bank has {}'.format(bank_cards))
+            bank_points = bank_points + points[e[0]]
+            if bank_points >= 10:
+                bank_points = bank_points - (bank_points - (bank_points % 10))
+            print('Bank has {} points'.format(bank_points))
 
-        while house_points < 6 and len(table_cards) == 3:
+        while bank_points < 6 and len(players_cards) == 3:
 
-            if house_points == 5 and points[e[0]] < 4 and points[e[0]] > 7:
+            if bank_points == 5 and points[e[0]] < 4 and points[e[0]] > 7:
                 break
-            elif house_points == 4 and points[e[0]] < 2 and points[e[0]] > 7:
+            elif bank_points == 4 and points[e[0]] < 2 and points[e[0]] > 7:
                 break    
-            elif house_points == 4 and points[e[0]] == 8:
+            elif bank_points == 4 and points[e[0]] == 8:
                 break
             else:
-                house_cards.append(f)
-                print('House has {}'.format(house_cards))
-                house_points = house_points + points[f[0]]
-                if house_points >= 10:
-                    house_points = house_points - (house_points - (house_points % 10))
-                print('House has {} points'.format(house_points))
+                bank_cards.append(f)
+                print('Bank has {}'.format(bank_cards))
+                bank_points = bank_points + points[f[0]]
+                if bank_points >= 10:
+                    bank_points = bank_points - (bank_points - (bank_points % 10))
+                print('Bank has {} points'.format(bank_points))
                 break
 
         if house_points == table_points:
@@ -195,12 +195,12 @@ while True:
             resultado = 'Tie'
             break
         elif table_points > house_points:
-            print('Table wins')
-            resultado = 'Table'
+            print('Players wins')
+            resultado = 'Players'
             break
         else:
-            print('House wins')
-            resultado = 'House'
+            print('Bank wins')
+            resultado = 'Bank'
             break
 
     # Pagamento de apostas
@@ -219,7 +219,7 @@ while True:
                     print('{} loses {} chips'.format(players[i], bets_chips[i]))
                     chips[i] = chips[i] - bets_chips[i]
 
-            if resultado == 'Table':
+            if resultado == 'Players':
                 if bets_winners[i] == resultado:
                     p = bets_chips[i]
                     q = int(p*0.9871)
@@ -231,7 +231,7 @@ while True:
                     print('{} loses {} chips'.format(players[i], bets_chips[i]))
                     chips[i] = chips[i] - bets_chips[i]
 
-            if resultado == 'House':
+            if resultado == 'Bank':
                 if bets_winners[i] == resultado:
                     p = int(bets_chips[i]*0.95)
                     q = int(p*0.9899)
@@ -256,7 +256,7 @@ while True:
                     print('{} loses {} chips'.format(players[i], bets_chips[i]))
                     chips[i] = chips[i] - bets_chips[i]
 
-            if resultado == 'Table':
+            if resultado == 'Players':
                 if bets_winners[i] == resultado:
                     p = bets_chips[i]
                     q = int(p*0.9876)
@@ -268,7 +268,7 @@ while True:
                     print('{} loses {} chips'.format(players[i], bets_chips[i]))
                     chips[i] = chips[i] - bets_chips[i]
 
-            if resultado == 'House':
+            if resultado == 'Bank':
                 if bets_winners[i] == resultado:
                     p = int(bets_chips[i]*0.95)
                     q = int(p*0.9894)
@@ -293,7 +293,7 @@ while True:
                     print('{} loses {} chips'.format(players[i], bets_chips[i]))
                     chips[i] = chips[i] - bets_chips[i]
 
-            if resultado == 'Table':
+            if resultado == 'Players':
                 if bets_winners[i] == resultado:
                     p = bets_chips[i]
                     q = int(p*0.9876)
@@ -305,7 +305,7 @@ while True:
                     print('{} loses {} chips'.format(players[i], bets_chips[i]))
                     chips[i] = chips[i] - bets_chips[i]
 
-            if resultado == 'House':
+            if resultado == 'Bank':
                 if bets_winners[i] == resultado:
                     p = int(bets_chips[i]*0.95)
                     q = int(p*0.9894)
