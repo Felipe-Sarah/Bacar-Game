@@ -59,13 +59,37 @@ points = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '1':0, 
 
 i = 0
 while i < len(players):
-    print(players[i] + ' recieves 100 chips')
+    print(players[i] + ' recieves 10000 chips')
     i+=1
 
-chips = [100]*len(players)
+chips = [10000]*len(players)
 
 
 while True:
+
+    k = 0
+    while k < len(players):
+        print('{} has {} chips'.format(players[k], chips[k]))
+        if chips[k] == 0:
+            print('{} has been removed due to insuficient funds'.format(players[k]))
+            del players[k]
+            del chips[k]
+            continue
+        m = input('{}, would you like to continue? (y/n) '.format(players[k]))
+        while m != 'y' and m != 'n':
+            print('Invalid answer')
+            m = input('{}, would you like to continue? (y/n) '.format(players[k]))
+        if m == 'n':
+            print('{} is out'.format(players[k]))
+            del players[k]
+            del chips[k]
+            continue    
+        k += 1
+
+    if len(players) == 0:
+        break
+
+
 
     random.shuffle(deck)
 
@@ -74,18 +98,24 @@ while True:
     bets_chips = []
     bets_winners = []
     i = 0
-    j = 1
     while i < len(players):
         bets_chips.append(int(input('{} place your bet value '.format(players[i]))))
-        bets_winners.append(input('on whom? (Table, House or Tie) '))
+        while bets_chips[i] > chips[i] or bets_chips[i] < 0:
+            print('Not enough chips or negative number!')
+            bets_chips[i] =int(input('{} place your bet value '.format(players[i])))
+
+        bets_winners.append(input('on whom? (Players, Bank or Tie) '))
+        while bets_winners[i] != 'Players' and bets_winners[i] != 'Bank' and bets_winners[i] != 'Tie':
+            print ('Invalid bet, please try again')
+            bets_winners[i] = input('on whom? (Players, Bank or Tie) ')
         i += 1
-        j += 1
 
-    table_cards = [deck[0], deck[1]]
-    house_cards = [deck[2], deck[3]]
 
-    print('Table has {}'.format(table_cards))
-    print('House has {}'.format(house_cards))
+    players_cards = [deck[0], deck[1]]
+    bank_cards = [deck[2], deck[3]]
+
+    print('Players has {}'.format(players_cards))
+    print('Players has {}'.format(bank_cards))
 
 
 
@@ -98,7 +128,7 @@ while True:
 
 
 
-    table_points = points[a[0]] + points[b[0]]
+    bank_points = points[a[0]] + points[b[0]]
     if table_points >= 10:
         table_points = table_points - (table_points - (table_points % 10))
     print('Table has {} points'.format(table_points))
@@ -179,12 +209,116 @@ while True:
         if n == 1:
             if resultado == 'Tie':
                 if bets_winners[i] == resultado:
-                    print('{} wins {} chips'.format(players[i], 8*bets_chips[i]*0.8425))
-                    chips[i] = chips[i] + 
-                
+                    p = 8*bets_chips[i]
+                    q = int(p*0.8425)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
 
+            if resultado == 'Table':
+                if bets_winners[i] == resultado:
+                    p = bets_chips[i]
+                    q = int(p*0.9871)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
 
-    
+            if resultado == 'House':
+                if bets_winners[i] == resultado:
+                    p = int(bets_chips[i]*0.95)
+                    q = int(p*0.9899)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]    
+            
+        if n == 6:
+            if resultado == 'Tie':
+                if bets_winners[i] == resultado:
+                    p = 8*bets_chips[i]
+                    q = int(p*0.8556)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
+
+            if resultado == 'Table':
+                if bets_winners[i] == resultado:
+                    p = bets_chips[i]
+                    q = int(p*0.9876)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
+
+            if resultado == 'House':
+                if bets_winners[i] == resultado:
+                    p = int(bets_chips[i]*0.95)
+                    q = int(p*0.9894)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]           
+
+        if n == 8:
+            if resultado == 'Tie':
+                if bets_winners[i] == resultado:
+                    p = 8*bets_chips[i]
+                    q = int(p*0.8564)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
+
+            if resultado == 'Table':
+                if bets_winners[i] == resultado:
+                    p = bets_chips[i]
+                    q = int(p*0.9876)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
+
+            if resultado == 'House':
+                if bets_winners[i] == resultado:
+                    p = int(bets_chips[i]*0.95)
+                    q = int(p*0.9894)
+                    print('{} wins {} chips'.format(players[i], p))
+                    print('Commission of {} chips'.format(p - q))
+                    print('{} gets {} chips'.format(players[i], q))
+                    chips[i] = chips[i] + q
+                else:
+                    print('{} loses {} chips'.format(players[i], bets_chips[i]))
+                    chips[i] = chips[i] - bets_chips[i]
+        i += 1
+
+print('Game over, thanks for playing! =D')
 
 
 
