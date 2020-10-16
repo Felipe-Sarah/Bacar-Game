@@ -115,7 +115,7 @@ while True:
     bank_cards = [deck[2], deck[3]]
 
     print('Players has {}'.format(players_cards))
-    print('Players has {}'.format(bank_cards))
+    print('Bank has {}'.format(bank_cards))
 
 
 
@@ -128,44 +128,44 @@ while True:
 
 
 
-    bank_points = points[a[0]] + points[b[0]]
-    if table_points >= 10:
-        table_points = table_points - (table_points - (table_points % 10))
-    print('Table has {} points'.format(table_points))
+    players_points = points[a[0]] + points[b[0]]
+    if players_points >= 10:
+        players_points = players_points - (players_points - (players_points % 10))
+    print('Players has {} points'.format(players_points))
 
-    house_points = points[c[0]] + points[d[0]]
-    if house_points >= 10:
-        house_points = house_points - (house_points - (house_points % 10))
-    print('House has {} points'.format(house_points))
+    bank_points = points[c[0]] + points[d[0]]
+    if bank_points >= 10:
+        bank_points = bank_points - (bank_points - (bank_points % 10))
+    print('Bank has {} points'.format(bank_points))
 
 
     while True:
 
-        if table_points > 7 or house_points > 7:
-            if house_points == table_points:
+        if players_points > 7 or bank_points > 7:
+            if bank_points == players_points:
                 print('Tie')
                 resultado = 'Tie'
                 break
-            elif table_points > house_points:
-                print('Table wins')
-                resultado = 'Table'
+            elif players_points > bank_points:
+                print('players win')
+                resultado = 'Players'
                 break
             else:
-                print('House wins')
-                resultado = 'House'
+                print('Bank wins')
+                resultado = 'Bank'
                 break
 
-        if table_points < 6:
-            table_cards.append(e)
-            print('Table has {}'.format(table_cards))
-            table_points = table_points + points[e[0]]
-            if table_points >= 10:
-                table_points = table_points - (table_points - (table_points % 10))
-            print('Table has {} points'.format(table_points))
+        if players_points < 6:
+            players_cards.append(e)
+            print('Players have {}'.format(players_cards))
+            players_points = players_points + points[e[0]]
+            if players_points >= 10:
+                players_points = players_points - (players_points - (players_points % 10))
+            print('Players have {} points'.format(table_points))
 
         
 
-        if house_points < 6 and len(table_cards) == 2:
+        if bank_points < 6 and len(table_cards) == 2:
             house_cards.append(e)
             print('House has {}'.format(house_cards))
             house_points = house_points + points[e[0]]
