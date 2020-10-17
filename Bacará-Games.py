@@ -99,7 +99,7 @@ while True:
     bets_winners = []
     i = 0
     while i < len(players):
-        bets_chips.append(int(input('{} place your bet value '.format(players[i]))))
+        bets_chips.append(int(input('{} place your bet value (number of chips) '.format(players[i]))))
         while bets_chips[i] > chips[i] or bets_chips[i] < 0:
             print('Not enough chips or negative number!')
             bets_chips[i] =int(input('{} place your bet value '.format(players[i])))
