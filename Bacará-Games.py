@@ -41,7 +41,6 @@ while j <= i:
     players.append(input('Name of player ' + str(j) + ' '))
     j += 1
 
-print(players)
 
 # Setting Decks
 n = int(input('Number of decks (1/6/8) '))
